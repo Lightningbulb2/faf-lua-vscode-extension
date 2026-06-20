@@ -3,15 +3,8 @@ Notice: Claude was used to read all the FAF specific functionality from [FAForev
 
 # FA Lua VSCode Extension
 
-This package contains the complete source for the **Lua FA** VS Code extension
-(publisher: `FAForever`, id: `lua-fa`), built on the modern
-[vscode-lua](https://github.com/LuaLS/vscode-lua) v3.18.2 wrapper with FA-specific
-configuration additions.
-
-The extension is a thin TypeScript wrapper that launches the language server binary,
-routes LSP messages, and provides VS Code UI (settings, addon manager, PSI viewer).
-All FA-specific intelligence lives in the language server — see the companion
-`fa-lua-language-server-patches.zip` for those sources.
+This is a Supreme Commander Forged Alliance specific language server, built on the modern
+[vscode-lua](https://github.com/LuaLS/vscode-lua) v3.18.2 and a wrapper with FA-specific additions.
 
 ---
 
