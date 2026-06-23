@@ -1,6 +1,6 @@
 --- modern-ext/package.json	2026-06-18 02:02:05.386758992 +0000
-+++ fa-modern-ext/package.json	2026-06-19 19:07:20.489707468 +0000
-@@ -1,3471 +1,3518 @@
++++ fa-modern-ext/package.json	2026-06-23 06:40:58.772655361 +0000
+@@ -1,3471 +1,3520 @@
  {
 -	"activationEvents": [
 -		"onLanguage:lua",
@@ -6536,8 +6536,9 @@
 +                    "type": "boolean"
 +                },
 +                "Lua.runtime.version": {
-+                    "default": "Lua 5.4",
++                    "default": "LuaFA",
 +                    "enum": [
++                        "LuaFA",
 +                        "Lua 5.1",
 +                        "Lua 5.2",
 +                        "Lua 5.3",
@@ -6547,6 +6548,7 @@
 +                    ],
 +                    "markdownDescription": "%config.runtime.version%",
 +                    "markdownEnumDescriptions": [
++                        "**FAForever**: FA's custom Lua 5.0/5.1-era runtime. Enables `table.getn`, `table.empty`, `continue`, `!=`, `arg` vararg table, and the FA class system without deprecation warnings. Set automatically by the FA type library.",
 +                        "%config.runtime.version.Lua 5.1%",
 +                        "%config.runtime.version.Lua 5.2%",
 +                        "%config.runtime.version.Lua 5.3%",

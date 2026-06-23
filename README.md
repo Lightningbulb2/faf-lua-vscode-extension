@@ -1,6 +1,6 @@
 Notice: Claude was used to read all the FAF specific functionality from [FAForever/fa-lua-vscode-extension](https://github.com/FAForever/fa-lua-vscode-extension) and build this extension for the [modern patched version](https://github.com/Lightningbulb2/faf-lua-language-server-patch).
 
-# FA Lua VSCode Extension
+# Lua FA VSCode Extension
 
 This is a Supreme Commander Forged Alliance specific language server, built on the modern
 [vscode-lua](https://github.com/LuaLS/vscode-lua) v3.18.2 and a wrapper with FA-specific additions.
@@ -182,29 +182,31 @@ cp $LS/bin/main.lua  server/bin/main.lua
 
 Then add the platform binaries. Include all platforms you want to support:
 
-**Linux binary** (built on Linux with `luamake rebuild`):
+**Linux binary** (WSL2, Docker, or CI — see the language server README):
 
 ```sh
 cp $LS/bin/lua-language-server  server/bin/lua-language-server
 ```
 
-**Windows binary — built natively on Windows** (`luamake.exe rebuild`, requires Visual Studio):
+**Windows binary — built natively with MSVC** (requires Visual Studio):
 
 ```sh
-# Copy the exe and all DLLs from bin/ (includes MSVC runtime DLLs)
+# Copy exe and all DLLs (MSVC runtime: msvcp140.dll, vcruntime140.dll, etc.)
 cp $LS/bin/lua-language-server.exe  server/bin/lua-language-server.exe
 cp $LS/bin/*.dll                    server/bin/
 ```
 
-**Windows binary — cross-compiled from Linux** (mingw, no MSVC runtime needed):
+**Windows binary — cross-compiled from Linux with mingw** (no MSVC runtime, just one DLL):
 
 ```sh
 cp $LS/build/win32/bin/lua-language-server.exe          server/bin/lua-language-server.exe
 cp /usr/x86_64-w64-mingw32/lib/libwinpthread-1.dll      server/bin/libwinpthread-1.dll
 ```
 
-The extension auto-selects the right binary at runtime via `os.platform()`, so you can
-include all of them in the same VSIX for a cross-platform package.
+The extension auto-selects the right binary at runtime via `os.platform()`, so include
+all platforms in the same `server/bin/` for a universal VSIX. See the language server
+README for full instructions on building Linux binaries from Windows (WSL2, Docker, or
+GitHub Actions).
 
 ### Step 7 — Package
 
