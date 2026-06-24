@@ -1,13 +1,22 @@
-Notice: Claude was used to read all the FAF specific functionality from [FAForever/fa-lua-vscode-extension](https://github.com/FAForever/fa-lua-vscode-extension) and build this extension for the [modern patched version](https://github.com/Lightningbulb2/faf-lua-language-server-patch).
+# Lua FA VSCode Extension Patch
 
-# Lua FA VSCode Extension
+This extension is for a Supreme Commander Forged Alliance specific language server, found at [Lightningbulb2/faf-lua-language-server-patch](https://github.com/Lightningbulb2/faf-lua-language-server-patch) it patches in FA-specific additions to [LuaLS](https://github.com/LuaLS/lua-language-server).
 
-This is a Supreme Commander Forged Alliance specific language server, built on the modern
-[vscode-lua](https://github.com/LuaLS/vscode-lua) v3.18.2 and a wrapper with FA-specific additions.
+<mark>**Notice**: Claude.ai was used to read all the FAF specific functionality from [FAForever/fa-lua-vscode-extension](https://github.com/FAForever/fa-lua-vscode-extension) and build this patch for [LuaLS/vscode-lua](https://github.com/LuaLS/vscode-lua).</mark>
 
 ---
 
-## FA-Specific Changes to the Extension
+## Table of Contents
+
+[FA-Specific Changes to the Extension](#fa-specific-changes-to-the-extension)
+
+[Building](#building)
+
+[What's in this package](#whats-in-this-package)
+
+---
+
+# FA-Specific Changes to the Extension
 
 ### `package.json`
 
@@ -36,26 +45,6 @@ server to highlight static class fields distinctly.
 **`name`** / **`publisher`**: Set to `lua-fa` / `FAForever` to avoid conflict with the
 upstream `sumneko.lua` / `LuaLS` extension.
 
-### `lua-language-configuration.json`
-
-Registers VS Code client-side folding markers for Lua files. This is what makes
-`-- #region` / `--#region` folding actually work — the LSP `foldingRange` response
-handles structural folding (functions, if blocks, tables), but comment-region folding
-is driven by client-side pattern matching from this file.
-
-The regex pattern `^\s*--+\s*#?region\b` matches all variants:
-
-| What you type                                       | Matched? |
-| --------------------------------------------------- | -------- |
-| `--region`                                          | ✓        |
-| `-- region`                                         | ✓        |
-| `--#region`                                         | ✓        |
-| `-- #region`                                        | ✓        |
-| `----region` _(post-FA-plugin form of `--#region`)_ | ✓        |
-
-Without this file, VS Code ignores the `kind: "region"` responses from the server for
-comment-based folds and `-- #region` appears as a normal comment with no fold gutter icon.
-
 ### `package.nls.json`
 
 Added NLS keys for the three new settings:
@@ -66,37 +55,7 @@ Added NLS keys for the three new settings:
 
 ---
 
-## What's in this package
-
-```
-extension/
-  package.json               Extension manifest — FA config properties, semantic tokens,
-                             publisher/name, configurationDefaults
-  package.nls.json           English NLS strings for FA-specific settings
-  package.nls.*.json         Localised NLS strings (es-419, ja-jp, pt-br, zh-cn, zh-tw)
-  client/
-    src/                     TypeScript source (unmodified from upstream)
-      extension.ts           Extension entry point
-      languageserver.ts      Binary launch logic, platform detection
-      addon_manager/         Addon manager commands, panels, services
-      psi/                   PSI tree viewer
-    package.json             Client npm manifest
-    tsconfig.json
-  setting/
-    schema.json              .luarc.json schema (includes FA setting definitions)
-    schema-*.json            Localised schemas
-    setting.json             Default setting values
-  images/                    Extension icons and screenshots
-  ...
-
-patches/
-  extension_package.json.patch      Diff against upstream package.json
-  extension_package.nls.json.patch  Diff against upstream package.nls.json
-```
-
----
-
-## Building
+# Building
 
 ### Prerequisites
 
@@ -108,33 +67,29 @@ patches/
 
 ### Step 1 — Clone the upstream extension
 
+This is all built on top of the VSCode Lua Language Server Extension so clone that somewhere and cd into it.
+
 ```sh
-git clone --depth=1 https://github.com/LuaLS/vscode-lua
+git clone https://github.com/LuaLS/vscode-lua
 cd vscode-lua
-```
-
-### Step 2 — Populate submodules
-
-```sh
-git clone --depth=1 https://github.com/LuaLS/vscode-lua-doc   client/3rd/vscode-lua-doc
-git clone --depth=1 https://github.com/LuaLS/vscode-lua-webvue client/webvue-src
-cp -r client/webvue-src/. client/webvue/
+git submodule update --init --recursive
 ```
 
 ### Step 3 — Apply the FA extension patches
 
 ```sh
-PATCHES=/path/to/this/package/patches
+SRC="/your/path/to/faf-lua-vscode-extension-patch"
 
 # Apply the two modified manifests
-patch -p1 < "$PATCHES/extension_package.json.patch"
-patch -p1 < "$PATCHES/extension_package.nls.json.patch"
+patch -p1 < "$SRC/patches/extension_package.json.patch"
+patch -p1 < "$SRC/patches/extension_package.nls.json.patch"
 ```
 
 Or copy them directly:
 
 ```sh
-SRC=/path/to/this/package/extension
+# SRC="/your/path/to/faf-lua-vscode-extension-patch"
+
 cp $SRC/package.json      package.json
 cp $SRC/package.nls.json  package.nls.json
 ```
@@ -150,7 +105,7 @@ npm run build   # runs tsc
 ### Step 5 — Build the Vue addon manager
 
 ```sh
-cd webvue    # or wherever the webvue source was placed
+cd webvue
 npm install
 npm run build
 # output goes to build/ inside this directory
@@ -162,7 +117,7 @@ The extension expects `server/` to contain the language server binary and Lua sc
 Build those from `fa-lua-language-server-patches.zip`, then copy them in:
 
 ```sh
-LS=/path/to/built/lua-language-server
+LS="/your/path/to/built/lua-language-server"
 
 mkdir -p server/bin
 
@@ -211,7 +166,7 @@ GitHub Actions).
 ### Step 7 — Package
 
 ```sh
-# From the extension root (vscode-lua/)
+# Current working directory: "your/path/to/vscode-lua"
 vsce package --no-dependencies
 ```
 
@@ -220,6 +175,7 @@ Output: `lua-fa-3.18.2.vsix`
 Install:
 
 ```sh
+
 code --install-extension lua-fa-3.18.2.vsix
 ```
 
@@ -232,7 +188,6 @@ code --install-extension lua-fa-3.18.2.vsix
 ```
 Windows → server/bin/lua-language-server.exe
 Linux   → server/bin/lua-language-server
-macOS   → server/bin/lua-language-server
 ```
 
 If `Lua.misc.executablePath` is set in VS Code settings, that path is used instead,
@@ -244,35 +199,14 @@ which bootstraps the Lua VM and loads `server/main.lua` as the entry point.
 
 ---
 
-## `.vscodeignore`
-
-Only these paths are included in the packaged `.vsix`:
+# What's in this package
 
 ```
-client/node_modules/        ← runtime npm dependencies
-client/out/                 ← compiled TypeScript
-client/package.json
-client/3rd/vscode-lua-doc/doc/
-client/3rd/vscode-lua-doc/extension.js
-client/webvue/build/        ← compiled Vue addon manager
+patches/
+  extension_package.json.patch      Diff against upstream package.json
+  extension_package.nls.json.patch  Diff against upstream package.nls.json
 
-server/bin/                 ← binaries + main.lua
-server/locale/
-server/script/
-server/main.lua
-server/debugger.lua
-server/meta/3rd/            ← FA type library (and other bundled libraries)
-server/meta/template/
-server/meta/spell/
+package.nls.json - already patched version
+package.json - already patched version
 
-setting/
-images/logo.png
-package.json
-package.nls.json
-package.nls.*.json
-README.md
-changelog.md
-LICENSE
 ```
-
-Everything else (TypeScript source, webvue source, test files, build scripts) is excluded.
