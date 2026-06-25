@@ -1,6 +1,6 @@
---- modern-ext/package.json	2026-06-24 04:57:45.580546000 -0400
-+++ fa-modern-ext/package.json	2026-06-24 04:57:36.166218900 -0400
-@@ -3063,8 +3063,9 @@
+--- modern-ext/package.json
++++ fa-modern-ext/package.json
+@@ -3064,8 +3064,9 @@
  					"type": "boolean"
  				},
  				"Lua.runtime.version": {
@@ -11,15 +11,15 @@
  						"Lua 5.1",
  						"Lua 5.2",
  						"Lua 5.3",
-@@ -3074,6 +3075,7 @@
+@@ -3075,6 +3076,7 @@
  					],
  					"markdownDescription": "%config.runtime.version%",
  					"markdownEnumDescriptions": [
-+						"**FAForever**: FA's custom Lua 5.0/5.1-era runtime. Enables `table.getn`, `table.empty`, `continue`, `!=`, `arg` vararg table, and the FA class system without deprecation warnings. Set automatically by the FA type library.",
++						"**FAForever**: FA's custom Lua 5.0/5.1-era runtime. Enables `table.getn`, `table.empty`, `continue`, `!=`, bitwise `&`, `|`, `<<`, `>>`, `^` (XOR), `arg` vararg table, and the FA class system without deprecation warnings. Set automatically by the FA type library.",
  						"%config.runtime.version.Lua 5.1%",
  						"%config.runtime.version.Lua 5.2%",
  						"%config.runtime.version.Lua 5.3%",
-@@ -3261,6 +3263,48 @@
+@@ -3262,6 +3264,48 @@
  					"markdownDescription": "%config.workspace.userThirdParty%",
  					"scope": "resource",
  					"type": "array"
@@ -68,7 +68,7 @@
  				}
  			},
  			"title": "Lua",
-@@ -3273,7 +3317,8 @@
+@@ -3274,7 +3318,8 @@
  					"other": "on",
  					"strings": "on"
  				},
@@ -78,7 +78,7 @@
  			}
  		},
  		"jsonValidation": [
-@@ -3439,13 +3484,16 @@
+@@ -3440,13 +3485,16 @@
  					],
  					"variable.readonly": [
  						"variable.other.constant.lua"
@@ -96,7 +96,7 @@
  	"engines": {
  		"vscode": "^1.86.0"
  	},
-@@ -3457,11 +3505,11 @@
+@@ -3458,11 +3506,11 @@
  	],
  	"license": "MIT",
  	"main": "./client/out/src/extension",
