@@ -45,6 +45,22 @@ server to highlight static class fields distinctly.
 **`name`** / **`publisher`**: Set to `lua-fa` / `FAForever` to avoid conflict with the
 upstream `sumneko.lua` / `LuaLS` extension.
 
+**`Lua.workspace.checkThirdParty`** default changed to `"Apply"`:
+The FA library is detected by matching any `.lua` word (pattern `"."`). With the default
+`"Ask"`, the extension shows a dialog on every fresh workspace asking the user to apply
+the FA type library — and if dismissed, all FA-specific settings (runtime version,
+`inject-field` disable, etc.) are never applied. Defaulting to `"Apply"` means the FA
+library config is applied automatically and silently, which is correct for a
+single-purpose FA extension.
+
+**`Lua.diagnostics.disable`** default set to `["inject-field"]`:
+FA code routinely attaches extra Lua-side fields to closed engine C++ types (e.g.
+`self.DragTL.textures = DragHandleTextures('ul')`). LuaLS 3.18.2 added `inject-field`
+as a new diagnostic that fires on every such assignment. Disabling it by default
+(rather than relying on the library `config.json` to disable it at detection time)
+ensures it is suppressed even before the third-party library is applied, and on
+workspaces where the library was previously applied without this setting.
+
 ### `package.nls.json`
 
 Added NLS keys for the three new settings:

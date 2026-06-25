@@ -1,6 +1,17 @@
 --- modern-ext/package.json
 +++ fa-modern-ext/package.json
-@@ -3064,8 +3064,9 @@
+@@ -177,7 +177,9 @@
+ 					"type": "boolean"
+ 				},
+ 				"Lua.diagnostics.disable": {
+-					"default": [],
++					"default": [
++						"inject-field"
++					],
+ 					"items": {
+ 						"enum": [
+ 							"action-after-return",
+@@ -3064,8 +3066,9 @@
  					"type": "boolean"
  				},
  				"Lua.runtime.version": {
@@ -11,7 +22,7 @@
  						"Lua 5.1",
  						"Lua 5.2",
  						"Lua 5.3",
-@@ -3075,6 +3076,7 @@
+@@ -3075,6 +3078,7 @@
  					],
  					"markdownDescription": "%config.runtime.version%",
  					"markdownEnumDescriptions": [
@@ -19,7 +30,15 @@
  						"%config.runtime.version.Lua 5.1%",
  						"%config.runtime.version.Lua 5.2%",
  						"%config.runtime.version.Lua 5.3%",
-@@ -3262,6 +3264,48 @@
+@@ -3203,6 +3207,7 @@
+ 					"type": "boolean"
+ 				},
+ 				"Lua.workspace.checkThirdParty": {
++					"default": "Apply",
+ 					"markdownDescription": "%config.workspace.checkThirdParty%",
+ 					"scope": "resource",
+ 					"type": [
+@@ -3262,6 +3267,48 @@
  					"markdownDescription": "%config.workspace.userThirdParty%",
  					"scope": "resource",
  					"type": "array"
@@ -68,7 +87,7 @@
  				}
  			},
  			"title": "Lua",
-@@ -3274,7 +3318,8 @@
+@@ -3274,7 +3321,8 @@
  					"other": "on",
  					"strings": "on"
  				},
@@ -78,7 +97,7 @@
  			}
  		},
  		"jsonValidation": [
-@@ -3440,13 +3485,16 @@
+@@ -3440,13 +3488,16 @@
  					],
  					"variable.readonly": [
  						"variable.other.constant.lua"
@@ -96,7 +115,7 @@
  	"engines": {
  		"vscode": "^1.86.0"
  	},
-@@ -3458,11 +3506,11 @@
+@@ -3458,11 +3509,11 @@
  	],
  	"license": "MIT",
  	"main": "./client/out/src/extension",
