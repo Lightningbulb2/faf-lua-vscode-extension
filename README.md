@@ -180,8 +180,11 @@ GitHub Actions).
 
 ### Step 7 — Package
 
+CD back to vscode-lua root and package
+
 ```sh
 # Current working directory: "your/path/to/vscode-lua"
+cd ../..
 vsce package --no-dependencies
 ```
 
