@@ -1,132 +1,77 @@
---- modern-ext/package.json
-+++ fa-modern-ext/package.json
-@@ -177,7 +177,9 @@
- 					"type": "boolean"
- 				},
- 				"Lua.diagnostics.disable": {
--					"default": [],
-+					"default": [
-+						"inject-field"
-+					],
- 					"items": {
- 						"enum": [
- 							"action-after-return",
-@@ -3064,8 +3066,9 @@
- 					"type": "boolean"
- 				},
- 				"Lua.runtime.version": {
--					"default": "Lua 5.4",
-+					"default": "LuaFA",
- 					"enum": [
-+						"LuaFA",
- 						"Lua 5.1",
- 						"Lua 5.2",
- 						"Lua 5.3",
-@@ -3075,6 +3078,7 @@
- 					],
- 					"markdownDescription": "%config.runtime.version%",
- 					"markdownEnumDescriptions": [
-+						"**FAForever**: FA's custom Lua 5.0/5.1-era runtime. Enables `table.getn`, `table.empty`, `continue`, `!=`, bitwise `&`, `|`, `<<`, `>>`, `^` (XOR), `arg` vararg table, and the FA class system without deprecation warnings. Set automatically by the FA type library.",
- 						"%config.runtime.version.Lua 5.1%",
- 						"%config.runtime.version.Lua 5.2%",
- 						"%config.runtime.version.Lua 5.3%",
-@@ -3203,6 +3207,7 @@
- 					"type": "boolean"
- 				},
- 				"Lua.workspace.checkThirdParty": {
-+					"default": "Apply",
- 					"markdownDescription": "%config.workspace.checkThirdParty%",
- 					"scope": "resource",
- 					"type": [
-@@ -3262,6 +3267,48 @@
- 					"markdownDescription": "%config.workspace.userThirdParty%",
- 					"scope": "resource",
- 					"type": "array"
-+				},
-+				"Lua.diagnostics.disableScheme": {
-+					"default": [
-+						"git"
-+					],
-+					"items": {
-+						"type": "string"
-+					},
-+					"markdownDescription": "%config.diagnostics.disableScheme%",
-+					"scope": "resource",
-+					"type": "array"
-+				},
-+				"Lua.runtime.exportEnvDefault": {
-+					"default": false,
-+					"markdownDescription": "%config.runtime.exportEnvDefault%",
-+					"scope": "resource",
-+					"type": "boolean"
-+				},
-+				"Lua.telemetry.enable": {
-+					"default": null,
-+					"markdownDescription": "%config.telemetry.enable%",
-+					"scope": "resource",
-+					"tags": [
-+						"telemetry"
-+					],
-+					"type": [
-+						"boolean",
-+						"null"
-+					]
-+				},
-+				"Lua.workspace.supportScheme": {
-+					"default": [
-+						"file",
-+						"untitled",
-+						"git"
-+					],
-+					"items": {
-+						"type": "string"
-+					},
-+					"markdownDescription": "%config.workspace.supportScheme%",
-+					"scope": "resource",
-+					"type": "array"
- 				}
- 			},
- 			"title": "Lua",
-@@ -3274,7 +3321,8 @@
- 					"other": "on",
- 					"strings": "on"
- 				},
--				"editor.semanticHighlighting.enabled": true
-+				"editor.semanticHighlighting.enabled": true,
-+				"editor.wordBasedSuggestions": false
- 			}
- 		},
- 		"jsonValidation": [
-@@ -3440,13 +3488,16 @@
- 					],
- 					"variable.readonly": [
- 						"variable.other.constant.lua"
-+					],
-+					"variable.static": [
-+						"variable.global.lua"
- 					]
- 				}
- 			}
- 		]
- 	},
- 	"description": "Lua Language Server coded by Lua",
--	"displayName": "Lua",
-+	"displayName": "Lua FA",
- 	"engines": {
- 		"vscode": "^1.86.0"
- 	},
-@@ -3458,11 +3509,11 @@
- 	],
- 	"license": "MIT",
- 	"main": "./client/out/src/extension",
--	"name": "lua",
--	"publisher": "sumneko",
-+	"name": "lua-fa",
-+	"publisher": "FAForever",
- 	"repository": {
- 		"type": "git",
--		"url": "https://github.com/LuaLS/lua-language-server"
-+		"url": "https://github.com/Lightningbulb2/faf-lua-language-server-patch"
- 	},
- 	"sponsor": {
- 		"url": "https://github.com/LuaLS/lua-language-server/issues/484"
+diff --git a/C:/Users/satre/Downloads/extensionsModern/vscode-lua-master/package.json b/C:/Users/satre/Downloads/extensionsModern/faf-lua-vscode-extension-patch-main/package.json
+index a277548..4e6f2e3 100644
+--- a/C:/Users/satre/Downloads/extensionsModern/vscode-lua-master/package.json
++++ b/C:/Users/satre/Downloads/extensionsModern/faf-lua-vscode-extension-patch-main/package.json
+@@ -4,7 +4,7 @@
+     "onWebviewPanel:lua-doc",
+     "onCommand:extension.lua.doc"
+   ],
+-  "author": "sumneko",
++  "author": "Lightningbulb",
+   "capabilities": {
+     "untrustedWorkspaces": {
+       "description": "",
+@@ -3064,8 +3064,9 @@
+           "type": "boolean"
+         },
+         "Lua.runtime.version": {
+-          "default": "Lua 5.4",
++          "default": "LuaFA",
+           "enum": [
++            "LuaFA",
+             "Lua 5.1",
+             "Lua 5.2",
+             "Lua 5.3",
+@@ -3075,6 +3076,7 @@
+           ],
+           "markdownDescription": "%config.runtime.version%",
+           "markdownEnumDescriptions": [
++            "**FAForever**: FA's custom Lua 5.0/5.1-era runtime. Enables `table.getn`, `table.empty`, `continue`, `!=`, bitwise `&`, `|`, `<<`, `>>`, `^` (XOR), `arg` vararg table, and the FA class system without deprecation warnings. Set automatically by the FA type library.",
+             "%config.runtime.version.Lua 5.1%",
+             "%config.runtime.version.Lua 5.2%",
+             "%config.runtime.version.Lua 5.3%",
+@@ -3203,6 +3205,7 @@
+           "type": "boolean"
+         },
+         "Lua.workspace.checkThirdParty": {
++          "default": "Apply",
+           "markdownDescription": "%config.workspace.checkThirdParty%",
+           "scope": "resource",
+           "type": [
+@@ -3274,7 +3277,8 @@
+           "other": "on",
+           "strings": "on"
+         },
+-        "editor.semanticHighlighting.enabled": true
++        "editor.semanticHighlighting.enabled": true,
++        "editor.wordBasedSuggestions": "off"
+       }
+     },
+     "jsonValidation": [
+@@ -3446,7 +3450,7 @@
+     ]
+   },
+   "description": "Lua Language Server coded by Lua",
+-  "displayName": "Lua",
++  "displayName": "Lua FAF",
+   "engines": {
+     "vscode": "^1.86.0"
+   },
+@@ -3458,14 +3462,11 @@
+   ],
+   "license": "MIT",
+   "main": "./client/out/src/extension",
+-  "name": "lua",
+-  "publisher": "sumneko",
++  "name": "lua-faf",
++  "publisher": "FAForever",
+   "repository": {
+     "type": "git",
+-    "url": "https://github.com/LuaLS/lua-language-server"
+-  },
+-  "sponsor": {
+-    "url": "https://github.com/LuaLS/lua-language-server/issues/484"
++    "url": "https://github.com/Lightningbulb2/faf-lua-language-server-patch"
+   },
+   "version": "3.18.2"
+ }

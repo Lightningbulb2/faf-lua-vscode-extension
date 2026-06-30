@@ -4,7 +4,7 @@
     "onWebviewPanel:lua-doc",
     "onCommand:extension.lua.doc"
   ],
-  "author": "sumneko",
+  "author": "Lightningbulb",
   "capabilities": {
     "untrustedWorkspaces": {
       "description": "",
@@ -177,9 +177,7 @@
           "type": "boolean"
         },
         "Lua.diagnostics.disable": {
-          "default": [
-            "inject-field"
-          ],
+          "default": [],
           "items": {
             "enum": [
               "action-after-return",
@@ -3267,48 +3265,6 @@
           "markdownDescription": "%config.workspace.userThirdParty%",
           "scope": "resource",
           "type": "array"
-        },
-        "Lua.diagnostics.disableScheme": {
-          "default": [
-            "git"
-          ],
-          "items": {
-            "type": "string"
-          },
-          "markdownDescription": "%config.diagnostics.disableScheme%",
-          "scope": "resource",
-          "type": "array"
-        },
-        "Lua.runtime.exportEnvDefault": {
-          "default": false,
-          "markdownDescription": "%config.runtime.exportEnvDefault%",
-          "scope": "resource",
-          "type": "boolean"
-        },
-        "Lua.telemetry.enable": {
-          "default": null,
-          "markdownDescription": "%config.telemetry.enable%",
-          "scope": "resource",
-          "tags": [
-            "telemetry"
-          ],
-          "type": [
-            "boolean",
-            "null"
-          ]
-        },
-        "Lua.workspace.supportScheme": {
-          "default": [
-            "file",
-            "untitled",
-            "git"
-          ],
-          "items": {
-            "type": "string"
-          },
-          "markdownDescription": "%config.workspace.supportScheme%",
-          "scope": "resource",
-          "type": "array"
         }
       },
       "title": "Lua",
@@ -3322,7 +3278,7 @@
           "strings": "on"
         },
         "editor.semanticHighlighting.enabled": true,
-        "editor.wordBasedSuggestions": false
+        "editor.wordBasedSuggestions": "off"
       }
     },
     "jsonValidation": [
@@ -3488,16 +3444,13 @@
           ],
           "variable.readonly": [
             "variable.other.constant.lua"
-          ],
-          "variable.static": [
-            "variable.global.lua"
           ]
         }
       }
     ]
   },
   "description": "Lua Language Server coded by Lua",
-  "displayName": "Lua FA",
+  "displayName": "Lua FAF",
   "engines": {
     "vscode": "^1.86.0"
   },
@@ -3509,14 +3462,11 @@
   ],
   "license": "MIT",
   "main": "./client/out/src/extension",
-  "name": "lua-fa",
+  "name": "lua-faf",
   "publisher": "FAForever",
   "repository": {
     "type": "git",
     "url": "https://github.com/Lightningbulb2/faf-lua-language-server-patch"
-  },
-  "sponsor": {
-    "url": "https://github.com/LuaLS/lua-language-server/issues/484"
   },
   "version": "3.18.2"
 }
