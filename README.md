@@ -97,7 +97,6 @@ git submodule update --init --recursive
 SRC="/your/path/to/faf-lua-vscode-extension-patch"
 
 # Apply the two modified manifests
-patch -p1 < "$SRC/patches/client_src_languageserver.ts.patch"
 patch -p1 < "$SRC/patches/package.json.patch"
 patch -p1 < "$SRC/patches/package.nls.json.patch"
 ```
