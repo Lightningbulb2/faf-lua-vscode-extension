@@ -86,22 +86,23 @@ Added NLS keys for the three new settings:
 This is all built on top of the VSCode Lua Language Server Extension so clone that somewhere and cd into it.
 
 ```sh
-git clone https://github.com/LuaLS/vscode-lua
+git clone --branch v3.18.2 https://github.com/LuaLS/vscode-lua
 cd vscode-lua
 git submodule update --init --recursive
 ```
 
-### Step 3 — Apply the FA extension patches
+### Step 2 — Apply the FA extension patches
 
 ```sh
 SRC="/your/path/to/faf-lua-vscode-extension-patch"
 
 # Apply the two modified manifests
+patch -p1 < "$SRC/patches/client_src_languageserver.ts.patch"
 patch -p1 < "$SRC/patches/package.json.patch"
 patch -p1 < "$SRC/patches/package.nls.json.patch"
 ```
 
-### Alternative Step 3
+### Alternative Step 2
 
 Or copy them directly:
 
@@ -112,7 +113,7 @@ cp $SRC/package.json      package.json
 cp $SRC/package.nls.json  package.nls.json
 ```
 
-### Step 4 — Build the TypeScript client
+### Step 3 — Build the TypeScript client
 
 ```sh
 cd client
@@ -120,16 +121,18 @@ npm install
 npm run build   # runs tsc
 ```
 
-### Step 5 — Build the Vue addon manager
+### Step 4 — Build the Vue addon manager
 
 ```sh
 cd webvue
 npm install
 npm run build
 # output goes to build/ inside this directory
+cd ../..
+# CD back to root for next steps
 ```
 
-### Step 6 — Assemble the server directory
+### Step 5 — Assemble the server directory
 
 The extension expects `server/` to contain the language server binary and Lua scripts.
 Build those from `faf-lua-language-server-patch`, then copy them in:
@@ -178,13 +181,10 @@ all platforms in the same `server/bin/` for a universal VSIX. See the [language 
 README for full instructions on building Linux binaries from Windows (WSL2, Docker, or
 GitHub Actions).
 
-### Step 7 — Package
-
-CD back to vscode-lua root and package
+### Step 6 — Package
 
 ```sh
 # Current working directory: "your/path/to/vscode-lua"
-cd ../..
 vsce package --no-dependencies
 ```
 

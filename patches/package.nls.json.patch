@@ -1,21 +1,26 @@
-diff --git a/C:/Users/satre/Downloads/extensionsModern/vscode-lua-master/package.nls.json b/C:/Users/satre/Downloads/extensionsModern/faf-lua-vscode-extension-patch-main/package.nls.json
-index 2c5e03e..199fdc7 100644
---- a/C:/Users/satre/Downloads/extensionsModern/vscode-lua-master/package.nls.json
-+++ b/C:/Users/satre/Downloads/extensionsModern/faf-lua-vscode-extension-patch-main/package.nls.json
+--- "vscode-lua/package.nls.json"
++++ "faf-lua-vscode-extension-patch/package.nls.json"
 @@ -201,6 +201,7 @@
-   "config.runtime.builtin.table.clear": "TODO: Needs documentation",
-   "config.runtime.builtin.table.new": "TODO: Needs documentation",
-   "config.runtime.builtin.utf8": "TODO: Needs documentation",
-+  "config.runtime.exportEnvDefault": "FAForever: When `true`, all globals in a file are exported as env by default. Use `---@declare-global` to opt out per-file. When `false` (default), a file must contain `---@export-env` to export its globals.",
-   "config.runtime.fileEncoding": "File encoding. The `ansi` option is only available under the `Windows` platform.",
-   "config.runtime.fileEncoding.ansi": "TODO: Needs documentation",
-   "config.runtime.fileEncoding.utf16be": "TODO: Needs documentation",
+     "config.runtime.builtin.table.clear": "TODO: Needs documentation",
+     "config.runtime.builtin.table.new": "TODO: Needs documentation",
+     "config.runtime.builtin.utf8": "TODO: Needs documentation",
++    "config.runtime.exportEnvDefault": "FAForever: When `true`, all globals in a file are exported as env by default. Use `---@declare-global` to opt out per-file. When `false` (default), a file must contain `---@export-env` to export its globals.",
+     "config.runtime.fileEncoding": "File encoding. The `ansi` option is only available under the `Windows` platform.",
+     "config.runtime.fileEncoding.ansi": "TODO: Needs documentation",
+     "config.runtime.fileEncoding.utf16be": "TODO: Needs documentation",
 @@ -241,7 +242,7 @@
-   "config.typeFormat.config.format_line": "Controls if a line is formatted at all.",
-   "config.window.progressBar": "Show progress bar in status bar.",
-   "config.window.statusBar": "Show extension status in status bar.",
--  "config.workspace.checkThirdParty": "Automatic detection and adaptation of third-party libraries, currently supported libraries are:\n\n* OpenResty\n* Cocos4.0\n* LÖVE\n* LÖVR\n* skynet\n* Jass\n",
-+  "config.workspace.checkThirdParty": "Automatic detection and adaptation of third-party libraries, currently supported libraries are:\n\n* Forged Alliance\n* OpenResty\n* Cocos4.0\n* LÖVE\n* LÖVR\n* skynet\n* Jass\n",
-   "config.workspace.ignoreDir": "Ignored files and directories (Use `.gitignore` grammar).",
-   "config.workspace.ignoreSubmodules": "Ignore submodules.",
-   "config.workspace.library": "In addition to the current workspace, which directories will load files from. The files in these directories will be treated as externally provided code libraries, and some features (such as renaming fields) will not modify these files.",
+     "config.typeFormat.config.format_line": "Controls if a line is formatted at all.",
+     "config.window.progressBar": "Show progress bar in status bar.",
+     "config.window.statusBar": "Show extension status in status bar.",
+-    "config.workspace.checkThirdParty": "Automatic detection and adaptation of third-party libraries, currently supported libraries are:\n\n* OpenResty\n* Cocos4.0\n* LÖVE\n* LÖVR\n* skynet\n* Jass\n",
++    "config.workspace.checkThirdParty": "Automatic detection and adaptation of third-party libraries, currently supported libraries are:\n\n* Forged Alliance\n* OpenResty\n* Cocos4.0\n* LÖVE\n* LÖVR\n* skynet\n* Jass\n",
+     "config.workspace.ignoreDir": "Ignored files and directories (Use `.gitignore` grammar).",
+     "config.workspace.ignoreSubmodules": "Ignore submodules.",
+     "config.workspace.library": "In addition to the current workspace, which directories will load files from. The files in these directories will be treated as externally provided code libraries, and some features (such as renaming fields) will not modify these files.",
+@@ -250,4 +251,4 @@
+     "config.workspace.supportScheme": "Provide language server for the Lua files of the following scheme.",
+     "config.workspace.useGitIgnore": "Ignore files list in `.gitignore` .",
+     "config.workspace.userThirdParty": "Add private third-party library configuration file paths here, please refer to the built-in [configuration file path](https://github.com/LuaLS/lua-language-server/tree/master/meta/3rd)"
+-}
+\ No newline at end of file
++}
